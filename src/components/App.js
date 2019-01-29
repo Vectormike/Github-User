@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Search from './search/Search';
+import Card from './Card';
 
 class App extends Component {
     constructor() {
@@ -23,9 +24,16 @@ class App extends Component {
         const fetchAPI = (username) => {
         fetch(`https://api.github.com/users/${username}`)
             .then(response => response.json())
-            .then(user => this.setState({user:user}))
+            .then(userID => this.setState({
+                user : {
+                    id: userID.id,
+                    name: userID.name,
+                    followers: userID.followers,
+                    location: userID.location
+                }
+            }))
         } 
-        fetchAPI(``)
+        fetchAPI(`Vectormike40`)
              
     }
     //Set current state when searched
@@ -35,9 +43,12 @@ class App extends Component {
     }
 
     render() {
+        
+
         return(
             <div>
             <Search searchChange= {this.onSearch}/>
+            <Card />
             </div>
         );
 }
