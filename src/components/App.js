@@ -7,27 +7,37 @@ class App extends Component {
 
 
         this.state = {
-            users: [],
+            user: [],
             searchField: ''
         }
     }
 
 
     componentDidMount() {
-        fetch('https://api.github.com/users')
-            .then(response => response.json())
-            .then(users => this.setState({users:users}))   
-                      
-    }
+        // fetch('https://api.github.com/users')
+        //     .then(response => response.json())
+        //     .then(users => this.setState({users:users}))   
 
+
+        //Fetch API as a function with a parameter
+        const fetchAPI = (username) => {
+        fetch(`https://api.github.com/users/${username}`)
+            .then(response => response.json())
+            .then(user => this.setState({user:user}))
+        } 
+        fetchAPI(``)
+             
+    }
+    //Set current state when searched
     onSearch = (event) => {
         console.log(event.target.value)
+        this.setState({searchField:event.target.value})
     }
 
     render() {
         return(
             <div>
-            <Search/>
+            <Search searchChange= {this.onSearch}/>
             </div>
         );
 }
