@@ -1,45 +1,44 @@
 import React, { Component } from 'react';
-import Search from './search/Search';
+import Search from './Search';
 import Card from './Card';
 import Footer from './Footer';
 
 class App extends Component {
     constructor() {
-        super()
-
-
+        super();
         this.state = {
-            user: [],
+            users: {},
             searchField: ''
-        }
+        };
     }
 
 
     componentDidMount() {
         //Fetch API with a parameter
-        let url = `https://api.github.com/users`;
-        fetch(url)
+        const getUser = (username) => {
+            fetch('https://api.github.com/users/${username}')
             .then(response => response.json())
-            .then(userID => this.setState({
-                user : userID
-            }))      
-            console.log(this.state.user)  
+            .then(response => {
+                console.log(response);
+              return response})      
+        }
+             
     }
     //Set current state when searched
-    onSearch = (event) => {
-        this.setState({searchField:event.target.value})
+    onSearchChange = (event) => {
+        this.setState({searchField: event.target.value})
     }
 
     render() {
         
         //Allow user to search to allow filtering
-        const filteredUser = this.state.user.filter(user => {
+        const filteredUser = this.state.users.filter(user => {
             return user.login.toLowerCase().includes(this.state.searchField)
         })
         
         return(
-            <div>
-            <Search searchChange= {this.onSearch}/>
+            <div className="tc">
+            <Search searchChange={this.onSearchChange}/>
             <Card user={filteredUser}/>
             <Footer/>
             </div>
