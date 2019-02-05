@@ -14,8 +14,10 @@ class App extends Component {
 
 
     componentDidMount() {
+        this.getUser('default');
+    }
         //Fetch API with a parameter
-        const getUser = (username) => {
+        getUser = (username) => {
             fetch(`https://api.github.com/users/${username}`)
             .then(response => response.json())
             .then(userInfo => this.setState({user: {
@@ -25,10 +27,10 @@ class App extends Component {
                 location: userInfo.location}
             })     
         )}
-        getUser(`vectormike40`)
-    }
+                    
     //Set current state when searched
     onSearchChange = (event) => {
+        console.log(event.target.getUser)
         this.setState({searchField: event.target.value})
     }
 
