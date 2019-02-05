@@ -27,11 +27,12 @@ class App extends Component {
                 location: userInfo.location}
             })     
         )}
-                    
+            
     //Set current state when searched
     onSearchChange = (event) => {
-        console.log(event.target.getUser)
+        console.log(event.target.value)
         this.setState({searchField: event.target.value})
+        this.getUser(event.target.value);
     }
 
     render() {
