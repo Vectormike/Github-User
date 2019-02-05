@@ -7,7 +7,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            users: {},
+            user: {},
             searchField: ''
         };
     }
@@ -16,13 +16,16 @@ class App extends Component {
     componentDidMount() {
         //Fetch API with a parameter
         const getUser = (username) => {
-            fetch('https://api.github.com/users/${username}')
+            fetch(`https://api.github.com/users/${username}`)
             .then(response => response.json())
-            .then(response => {
-                console.log(response);
-              return response})      
-        }
-             
+            .then(userInfo => this.setState({user: {
+                id: userInfo.id,
+                name: userInfo.name,
+                followers: userInfo.followers,
+                location: userInfo.location}
+            })     
+        )}
+        getUser(`vectormike40`)
     }
     //Set current state when searched
     onSearchChange = (event) => {
@@ -32,14 +35,12 @@ class App extends Component {
     render() {
         
         //Allow user to search to allow filtering
-        const filteredUser = this.state.users.filter(user => {
-            return user.login.toLowerCase().includes(this.state.searchField)
-        })
+        
         
         return(
             <div className="tc">
             <Search searchChange={this.onSearchChange}/>
-            <Card user={filteredUser}/>
+            <Card />
             <Footer/>
             </div>
         );
