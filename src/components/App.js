@@ -14,7 +14,7 @@ class App extends Component {
 
 
     componentDidMount() {
-        this.getUser('default');
+        this.getUser('vectormike40');
     }
         //Fetch API with a parameter
         getUser = (username) => {
@@ -42,9 +42,9 @@ class App extends Component {
         
         return(
             <div className="tc">
-            <Search searchChange={this.onSearchChange}/>
-            <Card />
-            <Footer/>
+                <Search searchChange={this.onSearchChange}/>
+                <Card userID={this.state.user}/>
+                <Footer/>
             </div>
         );
 }
