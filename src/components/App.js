@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from './Search';
 import Card from './Card';
+import Header from './Header';
 import Footer from './Footer';
 
 class App extends Component {
@@ -37,8 +38,9 @@ class App extends Component {
 
     render() {    
         return(
-            <div className="tc">
-                <Search keyPress={this.onKeyPress} search={this.state.searchField}/>
+			<div className="tc">
+				<Header/>
+				<Search keyPress={this.onKeyPress} search={this.state.searchField}/>
 				<Card userID={this.state.user}/>
                 <Footer/>
             </div>
