@@ -6,8 +6,27 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  animation: colorchange 50s;
+  -webkit-animation: colorchange 50s;
 }
 
+@keyframes colorchange
+{
+  0%   {background: rgb(230, 83, 83)(221, 212, 212);}
+  25%  {background: rgb(238, 238, 90);}
+  50%  {background: rgb(132, 132, 238);}
+  75%  {background: rgb(97, 247, 97);}
+  100% {background: rgb(87, 48, 48);}
+}
+
+@-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+{
+  0%   {background: rgb(189, 83, 83);}
+  25%  {background: rgb(160, 160, 56);}
+  50%  {background: rgb(75, 75, 133);}
+  75%  {background: rgb(50, 136, 50);}
+  100% {background: rgb(235, 120, 120);}
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
